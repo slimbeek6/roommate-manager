@@ -1,70 +1,337 @@
-# Getting Started with Create React App
+# Under One Roof
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Summary:
+=================================================================
 
-## Available Scripts
+This is a full stack web application that allows for a household to create a unique account, add roommates as users with important contact information, create a chore list and fairly delegate them out, add expenses and dynamically update a household budget, and add events for important dates and reminders. Each user has their own homepage that aggregates the information pertinent to them. The stack used is Sequelize, Express, React, and Node.
 
-In the project directory, you can run:
+[DeployedSite]()
 
-### `npm start`
+![IMAGE](https://github.com/profjjk/under-one-roof/blob/main/client/public/assets/README/UnderOneRoofDEMO.gif)
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Table of Contents:
+=================================================================
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* [Technologies Used](##technologies-used:)
+* [Installation](##installation:)
+* [Process](##process:)
+    - [SignUp Validation with React](###signup-validation-with-react)
+    - [Login Validation with React](###login-validation-&-jwt-creation)
+* [Authors](##authors:)
+* [License](##license:)
+* [Acknowledgements](##acknowledgements:)
 
-### `npm test`
+## Technologies Used:
+=================================================================
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Bootstrap](https://getbootstrap.com/)
+- [JavaScript](https://www.javascript.com/)
+- [jQuery](https://jquery.com/)
+- [JSON](https://www.json.org/json-en.html)
+- [MySQL](https://www.mysql.com/)
+- [Sequelize](https://sequelize.org/)
+- [Express.js](https://expressjs.com/)
+- [React](https://reactjs.org/)
+- [Node.js](https://nodejs.org/en/)
+- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+- [react-calendar](https://www.npmjs.com/package/react-calendar)
+- [react-dayjs](https://www.npmjs.com/package/react-dayjs)
+- [react-dom](https://reactjs.org/docs/react-dom.html)
+- [react-router-dom](https://reactrouter.com/web/guides/quick-start)
+- [react-scripts](https://www.npmjs.com/package/react-scripts)
+- [react-table](https://www.npmjs.com/package/react-table)
+- [react-validation](https://www.npmjs.com/package/react-validation)
+- [react-vis](https://uber.github.io/react-vis/)
+- [JWT](https://jwt.io/)
+- [Day.js](https://day.js.org/)
+- [mysql2](https://www.npmjs.com/package/mysql2)
+- [Visual Studio Code](https://code.visualstudio.com/)
 
-### `npm run build`
+## Installation:
+=================================================================
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+On the server side, run these command lines in the terminal:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+npm i axios bcryptjs cors dayjs express if-env jsonwebtoken mysql2 path react react-table react-vis sequelize
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+On the client side, run these command lines
 
-### `npm run eject`
+```
+npm i @testing-library/jest-dom @testing-library/react @testing-library/user-event dayjs moment react react-calendar react-dayjs react-dom react-router-dom react-scripts react-table react-validation sequelize web-vitals
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Process:
+=================================================================
+<!-- This is a root HTML IMAGE link if you want to use it to add more photos to the assets/README/ directory -->
+<!-- ![IMAGE](https://github.com/profjjk/under-one-roof/blob/main/client/public/assets/README/) -->
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### SignUp Validation with React
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+We used the react-validation library to validate forms. It is not easy to validate forms in react due to the one-way flow of data. We can't affect forms from the inputs in an easy way. React-validation provides several components which are 'connected' to the form via the input's method attached by the Form component.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![IMAGE](https://github.com/profjjk/under-one-roof/blob/main/client/public/assets/README/RequiredFieldsSignUp.png)
 
-## Learn More
+![IMAGE](https://github.com/profjjk/under-one-roof/blob/main/client/public/assets/README/SignUpFormValidation.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+import React, { useState, useRef } from "react";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+import { isEmail } from "validator";
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+import AuthService from "../services/auth.service";
 
-### Code Splitting
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const validEmail = (value) => {
+  if (!isEmail(value)) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This is not a valid email.
+      </div>
+    );
+  }
+};
 
-### Analyzing the Bundle Size
+const vusername = (value) => {
+  if (value.length < 3 || value.length > 40) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The address or nickname must be between 3 and 40 characters.
+      </div>
+    );
+  }
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const vpassword = (value) => {
+  if (value.length < 6 || value.length > 40) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The password must be between 6 and 40 characters.
+      </div>
+    );
+  }
+};
+```
 
-### Making a Progressive Web App
+![IMAGE](https://github.com/profjjk/under-one-roof/blob/main/client/public/assets/README/SuccessfulSignUp.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+For the SignUp page, we used the message response from this form validation to trigger a ternary operator. A failed response returns an alert-danger with the message. A successful response returns a success alert with the message and redirect link to the Login page.
 
-### Advanced Configuration
+```javascript
+{message && (
+<div className="form-group">
+    <div
+    className={ successful ? "alert alert-success" : "alert alert-danger" }
+    role="alert"
+    >
+    {message}
+    </div>
+    <div className="d-flex justify-content-center">
+    <a href="/login">
+        <img src="/assets/img/Login/loginICON-72.png" alt="Login button image" />
+    </a>
+    </div>
+</div>
+)}
+```
+<br>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Login Validation & JWT Creation
 
-### Deployment
+![IMAGE](https://github.com/profjjk/under-one-roof/blob/main/client/public/assets/README/LoginValidation.jpg)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+In this example, we validate the login credentials on the server side and grant a JWT for authentication only if the user is found with a corresponding hashed password. This token has a 24hr expiration for access.
 
-### `npm run build` fails to minify
+```javascript
+exports.signin = (req, res) => {
+    // Sign in from Database
+    Home.findOne({
+        where: {
+            username: req.body.username
+        }
+    })
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({ message: "User Not found." });
+            }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+            var passwordIsValid = bcrypt.compareSync(
+                req.body.password,
+                user.password
+            );
+
+            if (!passwordIsValid) {
+                return res.status(401).send({
+                    accessToken: null,
+                    message: "Invalid Password!"
+                });
+            }
+
+            var token = jwt.sign({ id: user.id }, config.secret, {
+                expiresIn: 86400 // 24 hours
+            });
+
+            res.status(200).send({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                accessToken: token
+            }); 
+        })
+        .catch(err => {
+            res.status(500).send({ message: err.message });
+        });
+};
+```
+
+
+### Expense Model & Budget/Expenses Pages
+
+To run a shared budget and payments analysis within our application, we needed to add a model instance in our database that could contain details about an expense. This model also includes a boolean paid descriptor, and if the instance of the model has been paid, there needs to be an associated paid by name.
+
+We instantiated this model as belonging to the Home model, which is our overarching login model.  With this relationship, we are able to restrict the data that is presented to an individiual home to only their own data.
+
+```javascript
+const currentUser = AuthService.getCurrentUser();
+
+// Data Retrieval Functions
+const getHomeId = () => {
+    const HomeId = currentUser.id;
+    return HomeId;
+}
+
+let HomeId = getHomeId();
+
+const getExpenses = (data) => {
+    let id = data;
+    API.getExpenses(id)
+    .then(results => {
+        sortExpenses(results.data)
+        dispatch({
+            type: GET_EXPENSES,
+            expenses: results.data
+        });
+    })       
+}
+
+useEffect (async () =>  {
+  await getExpenses(HomeId);
+}, []);
+```
+
+Beyond this, we used react-vis to populate our pie and bar charts on the Budget page, which required formatting our stately variable data into the highly specific parameters for the react-vis built in components.
+
+```javascript
+const pieDataFormat = (data) => {
+  // Create totals variables
+  let rentSum = 0;
+  let utilitiesSum = 0;
+  let otherSum = 0;
+
+  for (var i = 0; i < data.expenses.length; i++) {
+      if (data.expenses[i].expenseType === "rent" || data.expenses[i].expenseType === "Rent") {
+          rentSum += parseInt(data.expenses[i].expenseAmount);
+      } else if (data.expenses[i].expenseType === "utilities" || data.expenses[i].expenseType == "Utilities") {
+          utilitiesSum += parseInt(data.expenses[i].expenseAmount);
+      } else {
+          otherSum += parseInt(data.expenses[i].expenseAmount);
+      }
+  }
+
+  const pieChart = [];
+  pieChart.push({angle: rentSum, label: rentSum});
+  pieChart.push({angle: utilitiesSum, label: utilitiesSum});
+  pieChart.push({angle: otherSum, label: otherSum});
+  return pieChart;
+};
+const pieData = pieDataFormat(state);
+
+
+<div className="col-lg-7 chart d-flex justify-content-center">
+  <RadialChart
+  data={pieData}
+  radius={125}
+  width={300}
+  height={300} />
+</div>
+```
+
+Finally to create the reactive table at the bottom of the Budget page, we utilized the react-table package to create a clean manipulable table.
+
+```javascript
+<table className="table" border="1" {...getTableProps()} style={{textAlign: "center"}}>
+  <thead className="table-header">
+      {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column =>(
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                      {column.render("Header")}
+                      <span>
+                          {column.isSorted 
+                              ? column.isSortedDesc
+                                  ? "🔽"
+                                  : "🔼"
+                              : ""}
+                      </span>
+                  </th>
+              ))}
+          </tr>
+      ))}
+  </thead>
+  <tbody {...getTableBodyProps()}>
+      {rows.map(row => {
+          prepareRow(row)
+          return (
+              <tr {...row.getRowProps()}>
+                  {row.cells.map(cell => {
+                      return (
+                          <td {...cell.getCellProps()} >
+                              {cell.render("Cell")}
+                          </td>
+                      )
+                  })}
+              </tr>
+          )
+      })}
+  </tbody>
+</table> 
+```
+
+## Authors
+
+- Ryan Kirkland
+    - [GitHub](https://github.com/RyanKirkland86)
+    - [LinkedIn](https://www.linkedin.com/in/ryan-kirkland-619942200/)
+- Jordan Kelly
+    - [GitHub](https://github.com/profjjk)
+    - [LinkedIn](https://www.linkedin.com/in/the-real-jordan-kelly/)
+- Shaun Limbeek
+    - [GitHub](https://github.com/slimbeek6)
+    - [LinkedIn](https://www.linkedin.com/in/shaun-limbeek/)
+
+
+## License
+
+This Project is licensed under the MIT License.
+<br>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Acknowledgements
+
+A special thanks to our instructors Jerome, Mahi, and Manuel for all of your help and support. You guys are the best!
+- [UC Berkeley](https://bootcamp.berkeley.edu/coding/)
