@@ -1,5 +1,3 @@
-const home = require("./home");
-
 module.exports = function(sequelize, DataTypes) {
     const Chore = sequelize.define( "Chore", {
         choreName: {
