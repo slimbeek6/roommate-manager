@@ -38,5 +38,15 @@ module.exports = function(sequelize, DataTypes) {
         });
     };
 
+    Home.associate = function(models) {
+        Home.hasMany(models.Event, {
+            onDelete: "cascade",
+            foreignKey: {
+                name: "HomeId",
+                allowNull: false
+            }
+        });
+    };
+
     return Home;
 };
