@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
         assignedTo: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        completed: {
+            type: DataTypes.BOOLEAN,
+            default: false
         }
     });
 

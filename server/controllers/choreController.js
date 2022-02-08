@@ -11,6 +11,11 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
+    edit: function (req, res) {
+        db.Chore.update({completed: true}, { where: { id: req.params.id}})
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
     delete: (req, res) => {
         db.Chore.destroy({
           where: { id: req.params.id }
