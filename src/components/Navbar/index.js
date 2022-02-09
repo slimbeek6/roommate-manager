@@ -6,6 +6,11 @@ function Navbar() {
     // Insert functionality to have logged in home
     const currentUser = false;
 
+    // Create logout function
+    const logOut = function() {
+
+    };
+
     //Return the html of the navbar
     return (
         <nav className="navbar navbar-expand-lg navbar-dark blueBG">
@@ -28,6 +33,46 @@ function Navbar() {
                 </button>
 
                 
+                {/* If User is not logged in, create links to the Register and Login pages, otherwise links to Logout and Private Landing */}                   
+                <div className="navbar-nav ml-auto">
+                    {currentUser ? (
+                        // Logged in
+                        <div>
+                            <li className="nav-item active">
+                                <Link to={'/PrivateLanding'} className="nav-link">
+                                    <img src="/assets/img/Profile/profileICON-48.png" alt="Profile Button"></img>
+                                    Profile
+                                </Link>
+                            </li>
+
+                            <li className="nav-item active">
+                                <a href="/login" className="nav-link" onClick={logOut}>
+                                    <img src="/assets/img/LoginOut-with-House/LoginOutICON-48.png" alt="Logout Button" />
+                                    Logout
+                                </a>
+                            </li>
+                        </div>
+                    ) : (
+                        // Not Logged in
+
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li className="nav-item active">
+                                <Link to={'/Login'} className="nav-link">
+                                    <img src="/assets/img/LoginOut-with-House/LoginOutICON-48.png" alt="Login Button"></img>
+                                    Login
+                                </Link>
+                            </li>
+
+                            <li className="nav-item active">
+                                <Link to={'/Register'} className="nav-link">
+                                    <img src="/assets/img/LoginOut-with-House/register-with-houseICON-48.png" alt="Register Button"></img>
+                                    Register
+                                </Link>
+                            </li>
+                        </ul>
+                    )}   
+                </div>
+
             </div>
         </nav>
     );
