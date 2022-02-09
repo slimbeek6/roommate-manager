@@ -85,8 +85,6 @@ const Register = function(props) {
         }
     };
 
-
-
     // Return the html for the page itself
     return (
         <div className="col-md-12">
