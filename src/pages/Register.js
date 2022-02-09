@@ -63,7 +63,7 @@ const Register = function(props) {
     };
 
     const changeEmail = function (event) {
-        setUsername(event.target.value);
+        setEmail(event.target.value);
     };
 
     const changePassword = function (event) {
@@ -96,7 +96,7 @@ const Register = function(props) {
                 <img className="profile-img-card" src="/assets/img/addUser/addUserICON-96.png" alt="profile-img" /> 
 
                 {/* Use the react build form for registration information input */}
-                <Form onSubmit={} ref={form}>
+                <Form onSubmit={registerHome} ref={form}>
                     {!successful && (
                         <div>
                             {/* Input for the Home model username */}
