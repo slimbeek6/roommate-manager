@@ -16,6 +16,7 @@ function Navbar() {
         <nav className="navbar navbar-expand-lg navbar-dark blueBG">
             <div className="container-fluid">
 
+                {/* Left side of the Navbar */}
                 {/* Check if user is logged in, if not, redirect to the home page, otherwise to the dashboard */}
                 {currentUser ? (
                     <Link to={'/landing'} className="navbar-brand logo">
@@ -32,7 +33,47 @@ function Navbar() {
                     <span className="navbar-toggler-icon" />
                 </button>
 
-                
+                {/* Middle of Navbar - Only Visible when logged in */}
+                {currentUser ? (
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                            
+                            <li className="nav-item active">
+                                <Link to={'/budget'} className="nav-link">
+                                    <img src="/assets/img/NewBudget/UnderOneRoofNewBudgetLOGO48.png" alt="Budget Button"/>
+                                    Budget
+                                </Link>
+                            </li>
+
+                            <li className="nav-item active">
+                                <Link to={'/chores'} className="nav-link">
+                                    <img src="/assets/img/Chores/UnderOneRoofChoreLOGO48.png" alt="Chores Button"/>
+                                    Chores
+                                </Link>
+                            </li>
+
+                            <li className="nav-item active">
+                                <Link to={'/chores'} className="nav-link">
+                                    <img src="/assets/img/Calendar/UnderOneRoofCal-48.png" alt="Calendar Button"/>
+                                    Calendar
+                                </Link>
+                            </li>
+
+                            <li className="nav-item active">
+                                <Link to={'/expenses'} className="nav-link">
+                                    <img src="/assets/img/Expenses/UnderOneRoofExpense-48.png" alt="Expenses Button"/>
+                                    Expenses
+                                </Link>
+                            </li>
+
+                        </ul>
+                    </div>
+                ) : (
+                    <div></div>
+                )}
+
+
+                {/* Right side of Navbar */}
                 {/* If User is not logged in, create links to the Register and Login pages, otherwise links to Logout and Private Landing */}                   
                 <div className="navbar-nav ml-auto">
                     {currentUser ? (
