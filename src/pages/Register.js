@@ -56,7 +56,54 @@ const Register = function(props) {
                 <img className="profile-img-card" src="/assets/img/addUser/addUserICON-96.png" alt="profile-img" /> 
 
                 <Form onSubmit={} ref={form}>
-                    
+                    {!successful && (
+                        <div>
+                            <div className="form-group">
+                                <label htmlFor="username">Address or Home Nickname</label>
+                                <Input className="form-control"
+                                type="text"
+                                name="username"
+                                value={}
+                                onChange={}
+                                validations={[validateEmpty, validateUsername]}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="email">Master Email for Account</label>
+                                <Input className="form-control"
+                                type="text"
+                                name="email"
+                                value={}
+                                onChange={}
+                                validations={[validateEmpty, validateEmail]}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <Input className="form-control"
+                                type="text"
+                                name="password"
+                                value={}
+                                onChange={}
+                                validations={[validateEmpty, validatePassword]}
+                                />
+                            </div>
+                        </div>
+                    )}
+
+                    {message && (
+                        <div className="form-group">
+                            <div className={ successful ? "alert alert-success" : "alert alert-danger"} role="alert">{message}</div>
+                            <div className="d-flex justify-content-center">
+                                <a href="/login">
+                                    <img src="/assets/img/Login/loginICON-72.png" alt="Login button image" />
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                    <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
             </div>
         </div>
