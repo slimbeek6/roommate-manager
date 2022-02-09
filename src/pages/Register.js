@@ -1,5 +1,5 @@
 // Import key components and forms
-import React from "react";
+import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/buttons";
@@ -44,8 +44,46 @@ const validatePassword = function(input) {
 
 // Create the page for the Registration page, including front end js and html
 const Register = function(props) {
-    // Establish auth services and state/ref functionality
+    // Reference links to the form and the button
+    const form = useRef();
+    const checkBtn = useRef();
 
+    // Establish state elements for the Home model
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    // Establish state elements for front end functionality of button and alerts
+    const [successful, setSuccessful] = useState(false);
+    const [message, setMessage] = useState("");
+
+    // Create functions for changing the state element values
+    const changeUsername = function (event) {
+        setUsername(event.target.value);
+    };
+
+    const changeEmail = function (event) {
+        setUsername(event.target.value);
+    };
+
+    const changePassword = function (event) {
+        setPassword(event.target.value);
+    };
+
+    // Create function that submits the new home model value to the auth service
+    const registerHome = function (event) {
+        event.preventDefault();
+
+        setMessage("");
+        setSuccessful(false);
+
+        form.current.validateAll();
+
+        // Send the new values to the auth service
+        if (checkBtn.current.context._errors.length === 0) {
+            
+        }
+    };
 
 
 
@@ -53,46 +91,53 @@ const Register = function(props) {
     return (
         <div className="col-md-12">
             <div className="card card-container mx-auto my-5">
+
+                {/* Branding */}
                 <img className="profile-img-card" src="/assets/img/addUser/addUserICON-96.png" alt="profile-img" /> 
 
+                {/* Use the react build form for registration information input */}
                 <Form onSubmit={} ref={form}>
                     {!successful && (
                         <div>
+                            {/* Input for the Home model username */}
                             <div className="form-group">
                                 <label htmlFor="username">Address or Home Nickname</label>
                                 <Input className="form-control"
                                 type="text"
                                 name="username"
-                                value={}
-                                onChange={}
+                                value={username}
+                                onChange={changeUsername}
                                 validations={[validateEmpty, validateUsername]}
                                 />
                             </div>
 
+                            {/* Input for the Home model email */}
                             <div className="form-group">
                                 <label htmlFor="email">Master Email for Account</label>
                                 <Input className="form-control"
                                 type="text"
                                 name="email"
-                                value={}
-                                onChange={}
+                                value={email}
+                                onChange={changeEmail}
                                 validations={[validateEmpty, validateEmail]}
                                 />
                             </div>
 
+                            {/* Input for the Home model password */}
                             <div className="form-group">
                                 <label htmlFor="password">Password</label>
                                 <Input className="form-control"
                                 type="text"
                                 name="password"
-                                value={}
-                                onChange={}
+                                value={password}
+                                onChange={changePassword}
                                 validations={[validateEmpty, validatePassword]}
                                 />
                             </div>
                         </div>
                     )}
 
+                    {/* On submit, return a message. If successful, provide a link to the login page. If failure, send error message */}
                     {message && (
                         <div className="form-group">
                             <div className={ successful ? "alert alert-success" : "alert alert-danger"} role="alert">{message}</div>
