@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
 import API from "../utils/API";
-
-
+import ChoresCard from '../components/ChoresCard';
+import EventsCard from '../components/EventsCard';
+import ExpensesCard from '../components/ExpensesCard';
+import ContactCard from '../components/ContactCard';
 
 
 
