@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 module.exports = function(sequelize, DataTypes) {
     const Home = sequelize.define("Home", {
         username: {
@@ -24,6 +26,16 @@ module.exports = function(sequelize, DataTypes) {
             validate: {
                 len: [3],
                 isEmail: true
+            }
+        }
+    }, {
+        freezeTableName: true,
+        instanceMethods: {
+            generateHash(password) {
+                return bcrypt.hash(password, bcrypt.genSaltSync(8));
+            },
+            validPassword(password) {
+                return bcrypt.compare(password, this.password);
             }
         }
     });
