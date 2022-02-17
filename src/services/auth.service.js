@@ -18,7 +18,7 @@ const login = function(username, password) {
         })
         .then((response) => {
             if(response.data.accessToken) {
-                localStorage.setItem("user", JSON.stringify(response.data));
+                localStorage.setItem("home", JSON.stringify(response.data));
             }
 
             return response.data;
@@ -26,11 +26,11 @@ const login = function(username, password) {
 };
 
 const logout = function() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("home");
 };
 
-const getCurrentUser = function() {
-    return JSON.parse(localStorage.getItem("user"));
+const getCurrentHome = function() {
+    return JSON.parse(localStorage.getItem("home"));
 }
 
-export default {register, login, logout, getCurrentUser};
+export default {register, login, logout, getCurrentHome};
