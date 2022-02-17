@@ -80,7 +80,7 @@ function Navbar() {
                         // Logged in
                         <div>
                             <li className="nav-item active">
-                                <Link to={'/PrivateLanding'} className="nav-link">
+                                <Link to={'/landing'} className="nav-link">
                                     <img src="/assets/img/Profile/profileICON-48.png" alt="Profile Button"></img>
                                     Profile
                                 </Link>
@@ -98,15 +98,15 @@ function Navbar() {
 
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item active">
-                                <Link to={'/Login'} className="nav-link">
+                                <Link to={'/login'} className="nav-link">
                                     <img src="/assets/img/LoginOut-with-House/LoginOutICON-48.png" alt="Login Button"></img>
                                     Login
                                 </Link>
                             </li>
 
                             <li className="nav-item active">
-                                <Link to={'/Register'} className="nav-link">
-                                    <img src="/assets/img/LoginOut-with-House/register-with-houseICON-48.png" alt="Register Button"></img>
+                                <Link to={'/register'} className="nav-link">
+                                    <img src="/assets/img/Register-with-House/register-with-houseICON-48.png" alt="Register Button"></img>
                                     Register
                                 </Link>
                             </li>

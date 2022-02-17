@@ -1,4 +1,4 @@
-import React, { useReducer, useContext} from "react";
+import React, { useReducer, createContext, useContext} from "react";
 import { ADD_HOME, DELETE_HOME, GET_HOME } from "./actions";
 
 const homeContext = createContext({
@@ -36,4 +36,8 @@ const HomeProvider = ({value =[], ...props}) => {
     return <Provider value={[state, dispatch]}{...props} />;
 };
 
-export {HomeProvider};
+const useHomeContext = function() {
+    return useContext(homeContext);
+}
+
+export {HomeProvider, useHomeContext};

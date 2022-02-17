@@ -2,11 +2,13 @@
 import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/buttons";
+import CheckButton from "react-validation/build/button";
 import {isEmail} from "validator";
+import Header from "../components/Header";
+import "./style.css";
 
 // Import Login Auth Services
-
+import AuthService from "../services/auth.service";
 
 // Create functions to validate the inputs
 const validateEmpty = function(input) {
@@ -43,7 +45,7 @@ const validatePassword = function(input) {
 
 
 // Create the page for the Registration page, including front end js and html
-const Register = function(props) {
+const Register = () => {
     // Reference links to the form and the button
     const form = useRef();
     const checkBtn = useRef();
@@ -81,13 +83,22 @@ const Register = function(props) {
 
         // Send the new values to the auth service
         if (checkBtn.current.context._errors.length === 0) {
-            
-        }
+            AuthService.register(username, email, password)
+            .then((response) => {
+                setMessage(response.data.message);
+                setSuccessful(true);
+            }, (error) =>{
+                setMessage(error.data.message);
+                setSuccessful(false);
+            });
+        };
     };
 
     // Return the html for the page itself
     return (
+    
         <div className="col-md-12">
+            {/* <Header/> */}
             <div className="card card-container mx-auto my-5">
 
                 {/* Branding */}
@@ -150,6 +161,7 @@ const Register = function(props) {
                 </Form>
             </div>
         </div>
+        
     )
 };
 

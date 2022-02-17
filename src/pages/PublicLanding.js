@@ -1,7 +1,7 @@
 import React from "react";
-import "./sytle.css";
 
-const PublicLanding = function() {
+
+const PublicLanding = () => {
     // Establish the state and user services
 
     // Return the public landing page

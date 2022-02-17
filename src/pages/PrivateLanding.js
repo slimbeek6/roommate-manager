@@ -4,6 +4,7 @@ import ChoresCard from '../components/ChoresCard';
 import EventsCard from '../components/EventsCard';
 import ExpensesCard from '../components/ExpensesCard';
 import ContactCard from '../components/ContactCard';
+import AuthService from "../services/auth.service";
 
 
 
@@ -17,11 +18,13 @@ const PrivateLanding = function () {
 
     // Get and set the current home id
     const getHomeId = function() {
-        const homeId = currentHome.id;
+        const homeId = localStorage.homeId;
         return homeId;
     }
 
     let HomeId = getHomeId();
+
+    let currentHome = AuthService.getCurrentHome();
 
     // Use our API calls to pull in all of the relevant data
     useEffect(() => {
@@ -65,13 +68,13 @@ const PrivateLanding = function () {
                     </div>
             
                     <div className="col-8 pt-5">
-                        <h2 className="large display-3">{currentUser.username}</h2>
+                        <h2 className="large display-3">{currentHome.username}</h2>
                         <h4 className="medium mt-4 red">Summary"</h4>
                     </div>
                 </div>
             </header>
 
-            <div className="row justify-content-around m-5">
+            {/* <div className="row justify-content-around m-5">
                 <div className="col-xl-4 col-lg-5 col-sm-7">
                     <ChoresCard list={limitedChores} heading="Chores Due" />
                 </div>
@@ -88,7 +91,7 @@ const PrivateLanding = function () {
             <div className="row justify-content-around m-5">
                 <h2 className="col-12 large text-center mt-4 display-4 blue bold">Roommate Contact List</h2>
                     <ContactCard list={users} />
-            </div>
+            </div> */}
         </div>
     );
 };

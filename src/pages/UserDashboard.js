@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ProfileCard from "../components/ProfileCard";
-import ProfileForm from "../components/ProfileForm";
+// import ProfileCard from "../components/ProfileCard";
+// import ProfileForm from "../components/ProfileForm";
 import Header from '../components/Header';
 import AuthService from "../services/auth.service";
 import API from "../utils/API";
 
 const UserDashboard = function () {
-  const currentUser = AuthService.getCurrentUser();
+  const currentHome = AuthService.getCurrentHome();
   const [displayForm, setDisplayForm] = useState(false);
   const [users, setUsers] = useState([]);
 
   const getHomeId = () => {
-    const HomeId = currentUser.id;
+    const HomeId = currentHome.id;
     return HomeId;
   }
 
@@ -34,14 +34,14 @@ const UserDashboard = function () {
   if (displayForm) {
     return (
         <>
-          <ProfileForm hideForm={hideForm} />
+          {/* <ProfileForm hideForm={hideForm} /> */}
         </>
     )
   } else {
     return (
         <>
           <Header />
-          <ProfileCard showForm={showForm} users={users} />
+          {/* <ProfileCard showForm={showForm} users={users} /> */}
         </>
     )
   }
