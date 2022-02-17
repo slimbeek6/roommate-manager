@@ -17,7 +17,7 @@ const PrivateLanding = function () {
 
     // Get and set the current home id
     const getHomeId = function() {
-        const homeId = currentUser.id;
+        const homeId = currentHome.id;
         return homeId;
     }
 
