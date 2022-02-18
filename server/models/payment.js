@@ -1,30 +1,26 @@
 module.exports = function(sequelize, DataTypes) {
-    const Expense = sequelize.define( "Expense", {
-        expenseName: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        expenseAmount: {
+    const Payment = sequelize.define( "Payment", {
+        amount: {
             type: DataTypes.DECIMAL(10,2),
             allowNull: false
         },
-        expenseDate: {
+        paymentDate: {
             type: DataTypes.DATEONLY,
             allowNull: false
         },
-        incurredBy: {
+        paidBy: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        expenseType: {
+        paymentType: {
             type: ENUM,
             values: ["Rent", "Utilities", "Food & Drink", "Other"]
         }
     });
 
-    Expense.associate = function(models) {
-        Expense.belongsTo(models.Home);
+    Payment.associate = function(models) {
+        Payment.belongsTo(models.Home);
     };
 
-    return Expense;
+    return Payment;
 };
