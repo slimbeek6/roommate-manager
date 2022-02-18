@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const homeController = require("../../controllers/authController");
+const authController = require("../../controllers/authController");
 
 router.use(function(req, res, next) {
     res.header(
