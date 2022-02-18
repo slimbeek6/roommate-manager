@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const authController = require("../../controllers/authController");
+const { validateRegistration } = require("../../config/middleware");
 
 router.use(function(req, res, next) {
     res.header(
@@ -10,7 +11,7 @@ router.use(function(req, res, next) {
 });
 
 router.route("/signup")
-    .post(authController.signup);
+    .post(validateRegistration.validateNameEmail, authController.signup);
 
 router.route("/signin")
     .post(authController.signin);
