@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <HomeProvider> */}
+        <HomeProvider>
         <Navbar />
           <Routes>
             {/* Public Routes */}
@@ -53,7 +53,7 @@ function App() {
             )} 
               
           </Routes>
-        {/* </HomeProvider> */}
+        </HomeProvider>
       </BrowserRouter>
     </div>
   );

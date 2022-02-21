@@ -17,11 +17,13 @@ const reducer = function (state, action) {
             };
         case GET_HOME:
             return {...state, 
-            
+                homes: [...action.homes]
             };
         case DELETE_HOME:
             return {...state,
-            
+                homes: state.homes.filter((home) => {
+                    return home.username !== action.username;
+                })
             };
         default:
             return state;
