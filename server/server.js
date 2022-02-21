@@ -9,7 +9,7 @@ const routes = require("./routes");
 
 // Initiate the express server
 const app = express();
-const PORT = process.env.PORT || 5050;
+const PORT = process.env.PORT || 3000;
 
 // Initiate the cors service
 app.use('*', cors());

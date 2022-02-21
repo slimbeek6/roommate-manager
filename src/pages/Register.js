@@ -4,7 +4,6 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import {isEmail} from "validator";
-import Header from "../components/Header";
 import "./style.css";
 
 // Import Login Auth Services
@@ -98,7 +97,6 @@ const Register = () => {
     return (
     
         <div className="col-md-12">
-            {/* <Header/> */}
             <div className="card card-container mx-auto my-5">
 
                 {/* Branding */}
@@ -143,6 +141,10 @@ const Register = () => {
                                 validations={[validateEmpty, validatePassword]}
                                 />
                             </div>
+                        
+                            <div className="form-group">
+                                <button className="btn btn-primary btn-block">Sign Up</button>
+                            </div>
                         </div>
                     )}
 
@@ -157,6 +159,7 @@ const Register = () => {
                             </div>
                         </div>
                     )}
+                    
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
             </div>
