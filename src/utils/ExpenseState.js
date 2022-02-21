@@ -12,7 +12,7 @@ const ExpenseContext = createContext({
 const {Provider} = ExpenseContext;
 
 const reducer = (state, action) => {
-    switch(action.typoe) {
+    switch(action.type) {
         case ADD_EXPENSE:
             return {
                 ...state,
@@ -31,7 +31,7 @@ const reducer = (state, action) => {
                 expenses: [...action.expenses]
             };
         default:
-            return state:
+            return state;
     }
 };
 
