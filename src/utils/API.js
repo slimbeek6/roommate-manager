@@ -7,8 +7,8 @@ export default {
     getHome: function(id) {
         return axios.get(`${baseURL}/api/homes/` + id);
     },
-    addHome: function(data) {
-        return axios.post(`${baseURL}/api/homes/` + data.HomeId);
+    addHome: function(homeData) {
+        return axios.post(`${baseURL}/api/homes/`, homeData);
     },
     deleteHome: function(id) {
         return axios.delete(`${baseURL}/api/homes/` + id);
