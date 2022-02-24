@@ -13,7 +13,7 @@ router.use(function(req, res, next) {
 router.route("/signup")
     .post(validateRegistration.validateNameEmail, authController.signup);
 
-router.route("/signin")
-    .post(authController.signin);
+router.route("/login")
+    .post(authController.login);
 
 module.exports = router;

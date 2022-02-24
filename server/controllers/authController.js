@@ -19,7 +19,7 @@ exports.signup = (req, res) => {
     });
 };
 
-exports.signin = (req, res) => {
+exports.login = (req, res) => {
     Home.findOne({where: {username:req.body.username}})
     .then(home => {
         if(!home) {
