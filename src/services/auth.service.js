@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://glacial-eyrie-04065.herokuapp.com/api/homes/";
+const API_URL = "localhost:3000/api/auth/";
 
 const register = function (username, email, password) {
     return axios.post(API_URL + "signup", {

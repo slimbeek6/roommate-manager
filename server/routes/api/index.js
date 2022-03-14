@@ -6,7 +6,7 @@ const userRoutes = require('./users');
 const expenseRoutes = require('./expenses');
 const eventRoutes = require('./events');
 const choreRoutes = require('./chores');
-const homeRoutes = require('./home');
+const homeRoutes = require('./homes');
 const authRoutes = require('./auth');
 
 //Use the routes to create the router

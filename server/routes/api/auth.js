@@ -10,10 +10,10 @@ router.use(function(req, res, next) {
     next();
 });
 
-router.route("/signup")
+router.route("/auth/signup")
     .post(validateRegistration.validateNameEmail, authController.signup);
 
-router.route("/signin")
+router.route("/auth/signin")
     .post(authController.signin);
 
 module.exports = router;
