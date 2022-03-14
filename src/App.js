@@ -5,26 +5,26 @@ import PublicLanding from "./pages/PublicLanding";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { HomeProvider } from "./utils/LoginState"
-import PrivateLanding from "./pages/PrivateLanding";
-import Budget from "./pages/Budget";
-import Chores from "./pages/Chores";
-import Expenses from "./pages/Expenses";
-import Calendar from "./pages/Calendar";
-import UserDashboard from "./pages/UserDashboard";
-import AuthService from "./services/auth.service";
+// import PrivateLanding from "./pages/PrivateLanding";
+// import Budget from "./pages/Budget";
+// import Chores from "./pages/Chores";
+// import Expenses from "./pages/Expenses";
+// import Calendar from "./pages/Calendar";
+// import UserDashboard from "./pages/UserDashboard";
+// import AuthService from "./services/auth.service";
 import "./App.css";
 
 function App() {
   // Establish current Home state variable to manage login status
-  const [currentHome, setCurrentHome] = useState(undefined);
+  // const [currentHome, setCurrentHome] = useState(undefined);
 
-  useEffect(() => {
-    const loggedInHome = AuthService.getCurrentHome();
+  // useEffect(() => {
+  //   const loggedInHome = AuthService.getCurrentHome();
 
-    if (loggedInHome) {
-      setCurrentHome(loggedInHome);
-    }
-  }, []);
+  //   if (loggedInHome) {
+  //     setCurrentHome(loggedInHome);
+  //   }
+  // }, []);
 
   // Return the Router, Switch, Providers and Routes
   return (
@@ -39,7 +39,7 @@ function App() {
             <Route exact path = {"/login"} element={<Login />} />
 
               {/* Logged In Routes, when logged in, allow access to private routes, when not, automatically redirect to the Public Landing*/}
-            {currentHome ? (
+            {/* {currentHome ? (
               <>
                 <Route exact path="/landing" element={PrivateLanding} />
                 <Route exact path="/budget" component={Budget} />
@@ -50,7 +50,7 @@ function App() {
               </>
             ) : (
               <Route default="/" component={PublicLanding} />
-            )} 
+            )}  */}
               
           </Routes>
         </HomeProvider>

@@ -40,55 +40,55 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
 
-    Home.associate = function(models) {
-        Home.hasMany(models.User, {
-            onDelete: "cascade",
-            foreignKey: {
-                name: "HomeId",
-                allowNull: false
-            }
-        });
-    };
+    // Home.associate = function(models) {
+    //     Home.hasMany(models.User, {
+    //         onDelete: "cascade",
+    //         foreignKey: {
+    //             name: "HomeId",
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
-    Home.associate = function(models) {
-        Home.hasMany(models.Event, {
-            onDelete: "cascade",
-            foreignKey: {
-                name: "HomeId",
-                allowNull: false
-            }
-        });
-    };
+    // Home.associate = function(models) {
+    //     Home.hasMany(models.Event, {
+    //         onDelete: "cascade",
+    //         foreignKey: {
+    //             name: "HomeId",
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
-    Home.associate = function(models) {
-        Home.hasMany(models.Chore, {
-            onDelete: "cascade",
-            foreignKey: {
-                name: "HomeId",
-                allowNull: false
-            }
-        });
-    };
+    // Home.associate = function(models) {
+    //     Home.hasMany(models.Chore, {
+    //         onDelete: "cascade",
+    //         foreignKey: {
+    //             name: "HomeId",
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
-    Home.associate = function(models) {
-        Home.hasMany(models.Expense, {
-            onDelete: "cascade",
-            foreignKey: {
-                name: "HomeId",
-                allowNull: false
-            }
-        });
-    };
+    // Home.associate = function(models) {
+    //     Home.hasMany(models.Expense, {
+    //         onDelete: "cascade",
+    //         foreignKey: {
+    //             name: "HomeId",
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
-    Home.associate = function(models) {
-        Home.hasMany(models.Payment, {
-            onDelete: "cascade",
-            foreignKey: {
-                name: "HomeId",
-                allowNull: false
-            }
-        });
-    };
+    // Home.associate = function(models) {
+    //     Home.hasMany(models.Payment, {
+    //         onDelete: "cascade",
+    //         foreignKey: {
+    //             name: "HomeId",
+    //             allowNull: false
+    //         }
+    //     });
+    // };
 
     return Home;
 };

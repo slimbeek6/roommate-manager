@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "https://glacial-eyrie-04065.herokuapp.com/";
+const baseURL = "localhost:3000/";
 
 export default {
     // Login routes for home model
