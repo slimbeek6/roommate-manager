@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "localhost:3000/api/homes/";
+const API_URL = "https://mighty-refuge-08139.herokuapp.com/api/homes/";
 
 const register = function (username, email, password) {
     return axios.post(API_URL + "signup", {

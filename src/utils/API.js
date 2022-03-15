@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "localhost:3000";
+const baseURL = "https://mighty-refuge-08139.herokuapp.com";
 
 export default {
     // Login routes for home model
