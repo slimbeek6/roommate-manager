@@ -5,26 +5,22 @@ import PublicLanding from "./pages/PublicLanding";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { HomeProvider } from "./utils/LoginState"
-// import PrivateLanding from "./pages/PrivateLanding";
-// import Budget from "./pages/Budget";
-// import Chores from "./pages/Chores";
-// import Expenses from "./pages/Expenses";
-// import Calendar from "./pages/Calendar";
-// import UserDashboard from "./pages/UserDashboard";
-// import AuthService from "./services/auth.service";
+import authService from "./services/auth.service";
 import "./App.css";
 
 function App() {
   // Establish current Home state variable to manage login status
-  // const [currentHome, setCurrentHome] = useState(undefined);
+  const [currentHome, setCurrentHome] = useState(undefined);
 
-  // useEffect(() => {
-  //   const loggedInHome = AuthService.getCurrentHome();
+  useEffect(() => {
+    const loggedInHome = authService.getCurrentHome();
 
-  //   if (loggedInHome) {
-  //     setCurrentHome(loggedInHome);
-  //   }
-  // }, []);
+    if (loggedInHome) {
+      setCurrentHome(loggedInHome);
+    }
+
+    console.log(loggedInHome);
+  }, []);
 
   // Return the Router, Switch, Providers and Routes
   return (
@@ -33,25 +29,12 @@ function App() {
         <HomeProvider>
         <Navbar />
           <Routes>
+            
             {/* Public Routes */}
             <Route exact path = {"/"} element={<PublicLanding/>} />
             <Route exact path = {"/register"} element={<Register/>} />
             <Route exact path = {"/login"} element={<Login />} />
 
-              {/* Logged In Routes, when logged in, allow access to private routes, when not, automatically redirect to the Public Landing*/}
-            {/* {currentHome ? (
-              <>
-                <Route exact path="/landing" element={PrivateLanding} />
-                <Route exact path="/budget" component={Budget} />
-                <Route exact path="/chores" component={Chores} />
-                <Route exact path="/calendar" component={Calendar} />
-                <Route exact path="/expenses" component={Expenses} />
-                <Route exact path="/user" component={UserDashboard} />
-              </>
-            ) : (
-              <Route default="/" component={PublicLanding} />
-            )}  */}
-              
           </Routes>
         </HomeProvider>
       </BrowserRouter>
