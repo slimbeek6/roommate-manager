@@ -11,7 +11,7 @@ const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Initiate the cors service
+// // Initiate the cors service
 app.use('*', cors());
 
 // Initiate the non-static asset middleware

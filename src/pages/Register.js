@@ -80,6 +80,9 @@ const Register = () => {
 
         form.current.validateAll();
 
+        console.log(username);
+        console.log(password);
+
         // Send the new values to the auth service
         if (checkBtn.current.context._errors.length === 0) {
             AuthService.register(username, email, password)
